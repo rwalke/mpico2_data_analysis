@@ -1,0 +1,164 @@
+---
+title: "CO2 MPIDR"
+format: html
+editor: visual
+reference-location: margin
+---
+
+```{r}
+#| echo: false
+library(data.table)
+library(simplermarkdown)
+
+# hint by nate, stackoverflow
+auto_round_dt<- function(dt, ndigits=3, return_copy=TRUE){
+  dt<- data.table::setDT(dt)
+  roundme<- names(sapply(dt, class))[which(sapply(dt, class) == "numeric")]
+  if(return_copy == TRUE){
+    tmp<- data.table::copy(dt)
+    out<- tmp[, (roundme):=round(.SD, ndigits), .SDcols=roundme]
+    return(out)
+  } else{
+    return(dt[, (roundme):=round(.SD, ndigits), .SDcols=roundme])
+  }
+}
+```
+
+## MPIDR 2019
+
+### Data input
+
+```{r}
+
+CO2A <- data.table(year=rep(2019,9),cat=c(rep("Travel",7),rep("Energy",2)),
+                    type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
+                    rRate=c(100,16,100,16,16,16,100,100,100),
+                    number=c(716,1,405,21,5,2,1,NA,NA),
+                    dist=c(2500,2500,360,360,241,241,12199,NA,NA),
+                    kWh=c(rep(NA,7),303000,449533),
+                    factor=c(220,214,29,29,29,154,154,231,132.8))
+
+CO2A[,CO2resp:=ifelse(!is.na(dist), number*dist*factor/1e6, kWh*factor/1e6)]
+CO2A[,CO2all:=CO2resp * 100 / rRate]
+```
+
+Year, Category (cat), Type, Response Rate[^1] (rRate), Number (one-way), km Per Trip[^2] (dist), kWh, Factor[^3] (g CO2 / kWh or g CO2 / Pkm), t CO2 among respondents (CO2resp), t CO2 assuming 100% response rate (CO2all)
+
+[^1]: Survey Response Rates\
+    22 (61%) of the 36 survey participants had been at the institute in 2019.\
+    89 (66%) of the 135 people working at the institute in 2019 were still at the institute in late 2021.\
+    Our response rates were therefore 25% among the still-available people (22 / 89) and 16% among the whole 2019 population (22 / 135).
+
+[^2]: Distance Assumptions\
+    Average train distance (one-way): 68% of trips 2019-2022 went to/from Berlin or Hamburg (about 200km on average). Most of the next-most-common destinations were long-distance (e.g., Munich, Groningen, or Paris) with some closer destinations mixed in, we assumed an average of 700km.\
+    Average bus and car trip distance (one-way): Rostock - Berlin\
+    Average flight distance (one-way): half of the 2019 average roundtrip distance provided by Westtours\
+    For the institute car, the distance indicates the distance traveled over the entire year.
+
+[^3]: Conversion Factors\
+    Pkm = person kilometer; measures emissions per kilometer per individual passenger (rather than per vehicle)\
+    Flight conversion factors are taken from Westtours' report, but not used here; instead we use the total tons of CO2 that they report.\
+    Transport factors from German Environment Agency <https://www.umweltbundesamt.de/bild/vergleich-der-durchschnittlichen-emissionen-0>\
+    Electricity conversion factors from "Energieträgermix übrige DREWAG-Produkte", Stadtwerke Dresden <https://drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/produkte/strom/stromkennzeichnung>\
+    Heating conversion factors from RSAG Rostock, "Fernwärmetarif ohne Klimakompensierung" <https://www.swrag.de/INTERSHOP/static/WFS/SWR-Portal-Site/-/SWR-Portal/de_DE/Veroeffentlichungen/Downloads/Fernwaerme/Zerti_FW309_CO2_Rostock_Zertifikat_2018.pdf>
+
+### Results
+
+```{r}
+#| output: asis
+#| echo: false
+CO2A2<- auto_round_dt(dt=CO2A, ndigits = 2, return_copy = TRUE)
+cat(md_table(CO2A2))
+```
+
+**The total CO2 footprint for 2021 was `r CO2A[,round(sum(CO2all),2)]` t.**
+
+------------------------------------------------------------------------
+
+## MPIDR 2020
+
+### Data input
+
+```{r}
+
+CO2B <- data.table(year=rep(2020,9),cat=c(rep("Travel",7),rep("Energy",2)),
+                    type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
+                    rRate=c(100,19,100,19,19,19,100,100,100),
+                    number=c(75,0,79,8,0,0,1,NA,NA),
+                    dist=c(4288,2500,360,360,241,241,4756,NA,NA),
+                    kWh=c(rep(NA,7),309886,388600),
+                    factor=c(202.1,214,29,29,29,154,154,199,132.8))
+
+CO2B[,CO2resp:=ifelse(!is.na(dist), number*dist*factor/1e6, kWh*factor/1e6)]
+CO2B[,CO2all:=CO2resp * 100 / rRate]
+```
+
+Year, Category (cat), Type, Response Rate[^4] (rRate), Number (one-way), km Per Trip[^5] (dist), kWh, Factor[^6] (g CO2 / kWh or g CO2 / Pkm), t CO2 among respondents (CO2resp), t CO2 assuming 100% response rate (CO2all)
+
+[^4]: Survey Response Rates\
+    26 (72%) of the 36 survey participants had been at the institute in 2020.\
+    89 (66%) of the 135 people working at the institute in 2020 were still at the institute in mid-2022.\
+    Our response rates were therefore 29% among the still-available people (22 / 89) and 19% among the whole 2020 population (22 / 135).
+
+[^5]: Distance Assumptions\
+    See 2019.
+
+[^6]: Conversion Factors\
+    See 2019.
+
+### Results
+
+```{r}
+#| output: asis
+#| echo: false
+CO2B2<- auto_round_dt(dt=CO2B, ndigits = 2, return_copy = TRUE)
+cat(md_table(CO2B2))
+```
+
+**The total CO2 footprint for 2020 was `r CO2B[,round(sum(CO2all),2)]` t.**
+
+------------------------------------------------------------------------
+
+## MPIDR 2021
+
+### Data input
+
+```{r}
+
+CO2C <- data.table(year=rep(2021,9),cat=c(rep("Travel",7),rep("Energy",2)),
+                    type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
+                    rRate=c(100,25,100,25,25,25,100,100,100),
+                    number=c(33,2,47,0,6,2,1,NA,NA),
+                    dist=c(3290,2500,360,260,241,241,1670,NA,NA),
+                    kWh=c(rep(NA,7),309671,455000),
+                    factor=c(220,214,29,29,29,154,154,199,132.8))
+
+CO2C[,CO2resp:=ifelse(!is.na(dist), number*dist*factor/1e6, kWh*factor/1e6)]
+CO2C[,CO2all:=CO2resp * 100 / rRate]
+```
+
+Year, Category (cat), Type, Response Rate[^7] (rRate), Number (one-way), km Per Trip[^8] (dist), kWh, Factor[^9] (g CO2 / kWh or g CO2 / Pkm), t CO2 among respondents (CO2resp), t CO2 assuming 100% response rate (CO2all)
+
+[^7]: Survey Response Rates\
+    33 (92%) of the 36 survey participants had been at the institute in 2021.\
+    107 (82%) of the 131 people working at the institute in 2021 were still at the institute in mid-2022.\
+    Our response rates were therefore 31% among the still-available people (33 / 107) and 25% among the whole 2021 population (33 / 131).
+
+[^8]: Distance Assumptions\
+    See 2019.
+
+[^9]: Conversion Factors\
+    See 2019.
+
+### Results
+
+```{r}
+#| output: asis
+#| echo: false
+CO2C2<- auto_round_dt(dt=CO2C, ndigits = 2, return_copy = TRUE)
+cat(md_table(CO2C2))
+```
+
+**The total CO2 footprint for 2021 was `r CO2C[,round(sum(CO2all),2)]` t.**
+
+------------------------------------------------------------------------

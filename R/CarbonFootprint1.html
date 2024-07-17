@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">CO2 MPIDR</h1>
+<h1 class="title">CO<sub>2</sub> MPIDR</h1>
 </div>
 
 
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>CO2A[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>CO2A[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Year, Category (cat), Type, Response Rate<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (dist), kWh, Factor<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (g CO2 / kWh or g CO2 / Pkm), t CO2 among respondents (CO2resp), t CO2 assuming 100% response rate (CO2all)</p>
+<p>Year, Category (cat), Type, Response Rate<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (dist), kWh, Factor<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Survey Response Rates<br>
 22 (61%) of the 36 survey participants had been at the institute in 2019.<br>
 89 (66%) of the 135 people working at the institute in 2019 were still at the institute in late 2021.<br>
@@ -123,7 +123,7 @@ Average bus and car trip distance (one-way): Rostock - Berlin<br>
 Average flight distance (one-way): half of the 2019 average roundtrip distance provided by Westtours<br>
 For the institute car, the distance indicates the distance traveled over the entire year.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;Conversion Factors<br>
 Pkm = person kilometer; measures emissions per kilometer per individual passenger (rather than per vehicle)<br>
-Flight conversion factors are taken from Westtours’ report, but not used here; instead we use the total tons of CO2 that they report.<br>
+Flight conversion factors are taken from Westtours’ report, but not used here; instead we use the total tons of CO<sub>2</sub> that they report.<br>
 Transport factors from German Environment Agency <a href="https://www.umweltbundesamt.de/bild/vergleich-der-durchschnittlichen-emissionen-0" class="uri">https://www.umweltbundesamt.de/bild/vergleich-der-durchschnittlichen-emissionen-0</a><br>
 Electricity conversion factors from “Energieträgermix übrige DREWAG-Produkte”, Stadtwerke Dresden <a href="https://drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/produkte/strom/stromkennzeichnung" class="uri">https://drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/produkte/strom/stromkennzeichnung</a><br>
 Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompensierung” <a href="https://www.swrag.de/INTERSHOP/static/WFS/SWR-Portal-Site/-/SWR-Portal/de_DE/Veroeffentlichungen/Downloads/Fernwaerme/Zerti_FW309_CO2_Rostock_Zertifikat_2018.pdf" class="uri">https://www.swrag.de/INTERSHOP/static/WFS/SWR-Portal-Site/-/SWR-Portal/de_DE/Veroeffentlichungen/Downloads/Fernwaerme/Zerti_FW309_CO2_Rostock_Zertifikat_2018.pdf</a></p></div></div></section>
@@ -267,7 +267,7 @@ Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompe
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO2 footprint for 2021 was 534.99 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2021 was 534.99 t.</strong></p>
 <hr>
 </section>
 </section>
@@ -287,7 +287,7 @@ Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompe
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>CO2B[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>CO2B[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Year, Category (cat), Type, Response Rate<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> (dist), kWh, Factor<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> (g CO2 / kWh or g CO2 / Pkm), t CO2 among respondents (CO2resp), t CO2 assuming 100% response rate (CO2all)</p>
+<p>Year, Category (cat), Type, Response Rate<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> (dist), kWh, Factor<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
 <div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Survey Response Rates<br>
 26 (72%) of the 36 survey participants had been at the institute in 2020.<br>
 89 (66%) of the 135 people working at the institute in 2020 were still at the institute in mid-2022.<br>
@@ -434,7 +434,7 @@ See 2019.</p></div></div></section>
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO2 footprint for 2020 was 180.27 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2020 was 180.27 t.</strong></p>
 <hr>
 </section>
 </section>
@@ -454,7 +454,7 @@ See 2019.</p></div></div></section>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>CO2C[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>CO2C[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Year, Category (cat), Type, Response Rate<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> (dist), kWh, Factor<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> (g CO2 / kWh or g CO2 / Pkm), t CO2 among respondents (CO2resp), t CO2 assuming 100% response rate (CO2all)</p>
+<p>Year, Category (cat), Type, Response Rate<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> (dist), kWh, Factor<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
 <div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;Survey Response Rates<br>
 33 (92%) of the 36 survey participants had been at the institute in 2021.<br>
 107 (82%) of the 131 people working at the institute in 2021 were still at the institute in mid-2022.<br>
@@ -601,7 +601,124 @@ See 2019.</p></div></div></section>
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO2 footprint for 2021 was 151.43 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2021 was 151.43 t.</strong></p>
+<hr>
+</section>
+</section>
+<section id="mpidr-2022" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="mpidr-2022">MPIDR 2022</h2>
+<section id="data-input-3" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="data-input-3">Data input</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>CO2D <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">year=</span><span class="fu">rep</span>(<span class="dv">2022</span>,<span class="dv">5</span>),<span class="at">cat=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Travel"</span>,<span class="dv">3</span>),<span class="fu">rep</span>(<span class="st">"Energy"</span>,<span class="dv">2</span>)),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: atmosfair"</span>, <span class="st">"Train: Institute bookings"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">378</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2309</span>,<span class="dv">360</span>,<span class="dv">5732</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">3</span>),<span class="dv">302806</span>,<span class="dv">394800</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="dv">214</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">199</span>,<span class="fl">132.8</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>CO2D[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>CO2D[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> (dist), kWh, Factor<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;Distance Assumptions<br>
+atmosfair reports 309 bookings for 2022 with a total of 872880 km of flights and a total of 186.3143 tonnes of C0<sub>2</sub> (RFI 2.7). There where 309 bookings but probably at least 378 single flights (2309 km per single flight, 214g CO<sub>2</sub> RFI 2.7 per person and km).</p></div><div id="fn11"><p><sup>11</sup>&nbsp;Conversion Factors<br>
+See 2019.</p></div></div></section>
+<section id="results-3" class="level3">
+<h3 class="anchored" data-anchor-id="results-3">Results</h3>
+<table class="table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 33%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>year</th>
+<th>cat</th>
+<th>type</th>
+<th>rRate</th>
+<th>number</th>
+<th>dist</th>
+<th>kWh</th>
+<th>factor</th>
+<th>CO2resp</th>
+<th>CO2all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2022</td>
+<td>Travel</td>
+<td>Flights: atmosfair</td>
+<td>100</td>
+<td>378</td>
+<td>2309</td>
+<td>NA</td>
+<td>214.0</td>
+<td>186.78</td>
+<td>186.78</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>Travel</td>
+<td>Train: Institute bookings</td>
+<td>100</td>
+<td>0</td>
+<td>360</td>
+<td>NA</td>
+<td>29.0</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<td>2022</td>
+<td>Travel</td>
+<td>Institute car</td>
+<td>100</td>
+<td>1</td>
+<td>5732</td>
+<td>NA</td>
+<td>154.0</td>
+<td>0.88</td>
+<td>0.88</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>Energy</td>
+<td>Electricity</td>
+<td>100</td>
+<td>NA</td>
+<td>NA</td>
+<td>302806</td>
+<td>199.0</td>
+<td>60.26</td>
+<td>60.26</td>
+</tr>
+<tr class="odd">
+<td>2022</td>
+<td>Energy</td>
+<td>Heating</td>
+<td>100</td>
+<td>NA</td>
+<td>NA</td>
+<td>394800</td>
+<td>132.8</td>
+<td>52.43</td>
+<td>52.43</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The total CO<sub>2</sub> footprint for 2022 was 300.35 t.</strong></p>
 <hr>
 </section>
 </section>

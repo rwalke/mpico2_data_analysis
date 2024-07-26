@@ -722,6 +722,123 @@ See 2019.</p></div></div></section>
 <hr>
 </section>
 </section>
+<section id="mpidr-2023" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="mpidr-2023">MPIDR 2023</h2>
+<section id="data-input-4" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="data-input-4">Data input</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>CO2E <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">year=</span><span class="fu">rep</span>(<span class="dv">2023</span>,<span class="dv">5</span>),<span class="at">cat=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Travel"</span>,<span class="dv">3</span>),<span class="fu">rep</span>(<span class="st">"Energy"</span>,<span class="dv">2</span>)),</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: atmosfair"</span>, <span class="st">"Train: Institute bookings"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">708</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2415</span>,<span class="dv">360</span>,<span class="dv">5612</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">3</span>),<span class="dv">298321</span>,<span class="dv">407680</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="fl">241.89</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">199</span>,<span class="fl">132.8</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>CO2E[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>CO2E[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> (dist), kWh, Factor<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;Distance Assumptions<br>
+atmosfair reports 494 bookings for 2023 with a total of 1709587 km of flights and a total of 413.52 tonnes of C0<sub>2</sub> (RFI 2.7). There where 494 bookings but probably 708 single flights (2415 km per single flight, 242g CO<sub>2</sub> RFI 2.7 per person and km).</p></div><div id="fn13"><p><sup>13</sup>&nbsp;Conversion Factors<br>
+See 2019.</p></div></div></section>
+<section id="results-4" class="level3">
+<h3 class="anchored" data-anchor-id="results-4">Results</h3>
+<table class="table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 33%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>year</th>
+<th>cat</th>
+<th>type</th>
+<th>rRate</th>
+<th>number</th>
+<th>dist</th>
+<th>kWh</th>
+<th>factor</th>
+<th>CO2resp</th>
+<th>CO2all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2023</td>
+<td>Travel</td>
+<td>Flights: atmosfair</td>
+<td>100</td>
+<td>708</td>
+<td>2415</td>
+<td>NA</td>
+<td>241.89</td>
+<td>413.59</td>
+<td>413.59</td>
+</tr>
+<tr class="even">
+<td>2023</td>
+<td>Travel</td>
+<td>Train: Institute bookings</td>
+<td>100</td>
+<td>0</td>
+<td>360</td>
+<td>NA</td>
+<td>29.00</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>Travel</td>
+<td>Institute car</td>
+<td>100</td>
+<td>1</td>
+<td>5612</td>
+<td>NA</td>
+<td>154.00</td>
+<td>0.86</td>
+<td>0.86</td>
+</tr>
+<tr class="even">
+<td>2023</td>
+<td>Energy</td>
+<td>Electricity</td>
+<td>100</td>
+<td>NA</td>
+<td>NA</td>
+<td>298321</td>
+<td>199.00</td>
+<td>59.37</td>
+<td>59.37</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>Energy</td>
+<td>Heating</td>
+<td>100</td>
+<td>NA</td>
+<td>NA</td>
+<td>407680</td>
+<td>132.80</td>
+<td>54.14</td>
+<td>54.14</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The total CO<sub>2</sub> footprint for 2023 was 527.96 t.</strong></p>
+<hr>
+</section>
+</section>
 
 
 </main>

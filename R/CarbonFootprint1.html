@@ -97,6 +97,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="rail-distance-2019-2023" class="level4">
+<h4 class="anchored" data-anchor-id="rail-distance-2019-2023">Rail distance 2019-2023</h4>
+<table class="table">
+<thead>
+<tr class="header">
+<th>purchase</th>
+<th>year</th>
+<th>number</th>
+<th>distance</th>
+<th>total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>institute</td>
+<td>2019</td>
+<td>538</td>
+<td>247</td>
+<td>133072</td>
+</tr>
+<tr class="even">
+<td>offline</td>
+<td>2019</td>
+<td>23</td>
+<td>249</td>
+<td>5720</td>
+</tr>
+<tr class="odd">
+<td>institute</td>
+<td>2020</td>
+<td>99</td>
+<td>299</td>
+<td>29584</td>
+</tr>
+<tr class="even">
+<td>offline</td>
+<td>2020</td>
+<td>3</td>
+<td>566</td>
+<td>1697</td>
+</tr>
+<tr class="odd">
+<td>institute</td>
+<td>2021</td>
+<td>105</td>
+<td>257</td>
+<td>26934</td>
+</tr>
+<tr class="even">
+<td>offline</td>
+<td>2021</td>
+<td>2</td>
+<td>498</td>
+<td>996</td>
+</tr>
+<tr class="odd">
+<td>institute</td>
+<td>2022</td>
+<td>431</td>
+<td>264</td>
+<td>113717</td>
+</tr>
+<tr class="even">
+<td>institute</td>
+<td>2023</td>
+<td>554</td>
+<td>275</td>
+<td>152554</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="mpidr-2019" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="mpidr-2019">MPIDR 2019</h2>
 <section id="data-input" class="level3 page-columns page-full">
@@ -105,8 +177,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>CO2A <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">year=</span><span class="fu">rep</span>(<span class="dv">2019</span>,<span class="dv">9</span>),<span class="at">cat=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Travel"</span>,<span class="dv">7</span>),<span class="fu">rep</span>(<span class="st">"Energy"</span>,<span class="dv">2</span>)),</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: Westtours"</span>, <span class="st">"Flights: Self-booked (survey estimate)"</span>, <span class="st">"Train: Institute bookings"</span>, <span class="st">"Train: Self-booked (survey estimate)"</span>, <span class="st">"Bus: Self-booked (survey estimate)"</span>, <span class="st">"Car: Self-booked (survey estimate)"</span>, <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">16</span>,<span class="dv">100</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">716</span>,<span class="dv">1</span>,<span class="dv">405</span>,<span class="dv">21</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2500</span>,<span class="dv">2500</span>,<span class="dv">360</span>,<span class="dv">360</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">12199</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">716</span>,<span class="dv">1</span>,rail2019<span class="sc">$</span>number,<span class="dv">21</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2500</span>,<span class="dv">2500</span>,rail2019<span class="sc">$</span>distance,<span class="dv">360</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">12199</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">7</span>),<span class="dv">303000</span>,<span class="dv">449533</span>),</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="dv">220</span>,<span class="dv">214</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">154</span>,<span class="dv">231</span>,<span class="fl">132.8</span>))</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -186,12 +258,12 @@ Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompe
 <td>Travel</td>
 <td>Train: Institute bookings</td>
 <td>100</td>
-<td>405</td>
-<td>360</td>
+<td>538</td>
+<td>247</td>
 <td>NA</td>
 <td>29.0</td>
-<td>4.23</td>
-<td>4.23</td>
+<td>3.85</td>
+<td>3.85</td>
 </tr>
 <tr class="even">
 <td>2019</td>
@@ -267,7 +339,7 @@ Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompe
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO<sub>2</sub> footprint for 2021 was 534.99 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2021 was 534.62 t.</strong></p>
 <hr>
 </section>
 </section>
@@ -279,8 +351,8 @@ Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompe
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CO2B <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">year=</span><span class="fu">rep</span>(<span class="dv">2020</span>,<span class="dv">9</span>),<span class="at">cat=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Travel"</span>,<span class="dv">7</span>),<span class="fu">rep</span>(<span class="st">"Energy"</span>,<span class="dv">2</span>)),</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: Westtours"</span>, <span class="st">"Flights: Self-booked (survey estimate)"</span>, <span class="st">"Train: Institute bookings"</span>, <span class="st">"Train: Self-booked (survey estimate)"</span>, <span class="st">"Bus: Self-booked (survey estimate)"</span>, <span class="st">"Car: Self-booked (survey estimate)"</span>, <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">19</span>,<span class="dv">100</span>,<span class="dv">19</span>,<span class="dv">19</span>,<span class="dv">19</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">75</span>,<span class="dv">0</span>,<span class="dv">79</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">4288</span>,<span class="dv">2500</span>,<span class="dv">360</span>,<span class="dv">360</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">4756</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">75</span>,<span class="dv">0</span>,rail2020<span class="sc">$</span>number,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">4288</span>,<span class="dv">2500</span>,rail2020<span class="sc">$</span>distance,<span class="dv">360</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">4756</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">7</span>),<span class="dv">309886</span>,<span class="dv">388600</span>),</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="fl">202.1</span>,<span class="dv">214</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">154</span>,<span class="dv">199</span>,<span class="fl">132.8</span>))</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -353,12 +425,12 @@ See 2019.</p></div></div></section>
 <td>Travel</td>
 <td>Train: Institute bookings</td>
 <td>100</td>
-<td>79</td>
-<td>360</td>
+<td>99</td>
+<td>299</td>
 <td>NA</td>
 <td>29.0</td>
-<td>0.82</td>
-<td>0.82</td>
+<td>0.86</td>
+<td>0.86</td>
 </tr>
 <tr class="even">
 <td>2020</td>
@@ -434,7 +506,7 @@ See 2019.</p></div></div></section>
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO<sub>2</sub> footprint for 2020 was 180.27 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2020 was 180.3 t.</strong></p>
 <hr>
 </section>
 </section>
@@ -446,8 +518,8 @@ See 2019.</p></div></div></section>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>CO2C <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">year=</span><span class="fu">rep</span>(<span class="dv">2021</span>,<span class="dv">9</span>),<span class="at">cat=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Travel"</span>,<span class="dv">7</span>),<span class="fu">rep</span>(<span class="st">"Energy"</span>,<span class="dv">2</span>)),</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: Westtours"</span>, <span class="st">"Flights: Self-booked (survey estimate)"</span>, <span class="st">"Train: Institute bookings"</span>, <span class="st">"Train: Self-booked (survey estimate)"</span>, <span class="st">"Bus: Self-booked (survey estimate)"</span>, <span class="st">"Car: Self-booked (survey estimate)"</span>, <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">25</span>,<span class="dv">100</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">33</span>,<span class="dv">2</span>,<span class="dv">47</span>,<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">3290</span>,<span class="dv">2500</span>,<span class="dv">360</span>,<span class="dv">260</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">1670</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">33</span>,<span class="dv">2</span>,rail2021<span class="sc">$</span>number,<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">3290</span>,<span class="dv">2500</span>,rail2021<span class="sc">$</span>distance,<span class="dv">260</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">1670</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">7</span>),<span class="dv">309671</span>,<span class="dv">455000</span>),</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="dv">220</span>,<span class="dv">214</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">154</span>,<span class="dv">199</span>,<span class="fl">132.8</span>))</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -520,12 +592,12 @@ See 2019.</p></div></div></section>
 <td>Travel</td>
 <td>Train: Institute bookings</td>
 <td>100</td>
-<td>47</td>
-<td>360</td>
+<td>105</td>
+<td>257</td>
 <td>NA</td>
 <td>29.0</td>
-<td>0.49</td>
-<td>0.49</td>
+<td>0.78</td>
+<td>0.78</td>
 </tr>
 <tr class="even">
 <td>2021</td>
@@ -601,7 +673,7 @@ See 2019.</p></div></div></section>
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO<sub>2</sub> footprint for 2021 was 151.43 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2021 was 151.72 t.</strong></p>
 <hr>
 </section>
 </section>
@@ -614,8 +686,8 @@ See 2019.</p></div></div></section>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: atmosfair"</span>, <span class="st">"Train: Institute bookings"</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">378</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2309</span>,<span class="dv">360</span>,<span class="dv">5732</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">378</span>,rail2022<span class="sc">$</span>number,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2309</span>,rail2022<span class="sc">$</span>distance,<span class="dv">5732</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">3</span>),<span class="dv">302806</span>,<span class="dv">394800</span>),</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="dv">214</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">199</span>,<span class="fl">132.8</span>))</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -673,12 +745,12 @@ See 2019.</p></div></div></section>
 <td>Travel</td>
 <td>Train: Institute bookings</td>
 <td>100</td>
-<td>0</td>
-<td>360</td>
+<td>431</td>
+<td>264</td>
 <td>NA</td>
 <td>29.0</td>
-<td>0.00</td>
-<td>0.00</td>
+<td>3.30</td>
+<td>3.30</td>
 </tr>
 <tr class="odd">
 <td>2022</td>
@@ -718,7 +790,7 @@ See 2019.</p></div></div></section>
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO<sub>2</sub> footprint for 2022 was 300.35 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2022 was 303.65 t.</strong></p>
 <hr>
 </section>
 </section>
@@ -731,8 +803,8 @@ See 2019.</p></div></div></section>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: atmosfair"</span>, <span class="st">"Train: Institute bookings"</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">708</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2415</span>,<span class="dv">360</span>,<span class="dv">5612</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">708</span>,rail2023<span class="sc">$</span>number,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2415</span>,rail2023<span class="sc">$</span>distance,<span class="dv">5612</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">3</span>),<span class="dv">298321</span>,<span class="dv">407680</span>),</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="fl">241.89</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">199</span>,<span class="fl">132.8</span>))</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -790,12 +862,12 @@ See 2019.</p></div></div></section>
 <td>Travel</td>
 <td>Train: Institute bookings</td>
 <td>100</td>
-<td>0</td>
-<td>360</td>
+<td>554</td>
+<td>275</td>
 <td>NA</td>
 <td>29.00</td>
-<td>0.00</td>
-<td>0.00</td>
+<td>4.42</td>
+<td>4.42</td>
 </tr>
 <tr class="odd">
 <td>2023</td>
@@ -835,7 +907,7 @@ See 2019.</p></div></div></section>
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO<sub>2</sub> footprint for 2023 was 527.96 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2023 was 532.38 t.</strong></p>
 <hr>
 </section>
 </section>

@@ -1,7 +1,7 @@
 ---
 title: "CO~2~ MPIDR"
 format: html
-editor: visual
+editor: source
 reference-location: margin
 ---
 
@@ -9,6 +9,10 @@ reference-location: margin
 #| echo: false
 library(data.table)
 library(simplermarkdown)
+
+rail_data_dir <- file.path("..","R_rail_distance")
+load(file.path(rail_data_dir, "rail12geom.Rdata"))
+
 
 # hint by nate, stackoverflow
 auto_round_dt<- function(dt, ndigits=3, return_copy=TRUE){
@@ -24,6 +28,22 @@ auto_round_dt<- function(dt, ndigits=3, return_copy=TRUE){
 }
 ```
 
+#### Rail distance 2019-2023
+
+```{r}
+#| output: asis
+#| echo: false
+rail <- auto_round_dt(rail12geom[,.(number=.N, distance=sum(distance)/.N, total=sum(distance)), by=.(purchase, year)], ndigits = 0, return_copy = TRUE)
+
+cat(md_table(rail))
+rail2019 <- rail[purchase=="institute" & year == 2019,]
+rail2020 <- rail[purchase=="institute" & year == 2020,]
+rail2021 <- rail[purchase=="institute" & year == 2021,]
+rail2022 <- rail[purchase=="institute" & year == 2022,]
+rail2023 <- rail[purchase=="institute" & year == 2023,]
+
+```
+
 ## MPIDR 2019
 
 ### Data input
@@ -33,8 +53,8 @@ auto_round_dt<- function(dt, ndigits=3, return_copy=TRUE){
 CO2A <- data.table(year=rep(2019,9),cat=c(rep("Travel",7),rep("Energy",2)),
                     type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
                     rRate=c(100,16,100,16,16,16,100,100,100),
-                    number=c(716,1,405,21,5,2,1,NA,NA),
-                    dist=c(2500,2500,360,360,241,241,12199,NA,NA),
+                    number=c(716,1,rail2019$number,21,5,2,1,NA,NA),
+                    dist=c(2500,2500,rail2019$distance,360,241,241,12199,NA,NA),
                     kWh=c(rep(NA,7),303000,449533),
                     factor=c(220,214,29,29,29,154,154,231,132.8))
 
@@ -84,8 +104,8 @@ cat(md_table(CO2A2))
 CO2B <- data.table(year=rep(2020,9),cat=c(rep("Travel",7),rep("Energy",2)),
                     type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
                     rRate=c(100,19,100,19,19,19,100,100,100),
-                    number=c(75,0,79,8,0,0,1,NA,NA),
-                    dist=c(4288,2500,360,360,241,241,4756,NA,NA),
+                    number=c(75,0,rail2020$number,8,0,0,1,NA,NA),
+                    dist=c(4288,2500,rail2020$distance,360,241,241,4756,NA,NA),
                     kWh=c(rep(NA,7),309886,388600),
                     factor=c(202.1,214,29,29,29,154,154,199,132.8))
 
@@ -128,8 +148,8 @@ cat(md_table(CO2B2))
 CO2C <- data.table(year=rep(2021,9),cat=c(rep("Travel",7),rep("Energy",2)),
                     type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
                     rRate=c(100,25,100,25,25,25,100,100,100),
-                    number=c(33,2,47,0,6,2,1,NA,NA),
-                    dist=c(3290,2500,360,260,241,241,1670,NA,NA),
+                    number=c(33,2,rail2021$number,0,6,2,1,NA,NA),
+                    dist=c(3290,2500,rail2021$distance,260,241,241,1670,NA,NA),
                     kWh=c(rep(NA,7),309671,455000),
                     factor=c(220,214,29,29,29,154,154,199,132.8))
 
@@ -173,8 +193,8 @@ CO2D <- data.table(year=rep(2022,5),cat=c(rep("Travel",3),rep("Energy",2)),
                     type=c("Flights: atmosfair", "Train: Institute bookings",
                            "Institute car", "Electricity", "Heating"),
                     rRate=c(100,100,100,100,100),
-                    number=c(378,0,1,NA,NA),
-                    dist=c(2309,360,5732,NA,NA),
+                    number=c(378,rail2022$number,1,NA,NA),
+                    dist=c(2309,rail2022$distance,5732,NA,NA),
                     kWh=c(rep(NA,3),302806,394800),
                     factor=c(214,29,154,199,132.8))
 
@@ -213,8 +233,8 @@ CO2E <- data.table(year=rep(2023,5),cat=c(rep("Travel",3),rep("Energy",2)),
                     type=c("Flights: atmosfair", "Train: Institute bookings",
                            "Institute car", "Electricity", "Heating"),
                     rRate=c(100,100,100,100,100),
-                    number=c(708,0,1,NA,NA),
-                    dist=c(2415,360,5612,NA,NA),
+                    number=c(708,rail2023$number,1,NA,NA),
+                    dist=c(2415,rail2023$distance,5612,NA,NA),
                     kWh=c(rep(NA,3),298321,407680),
                     factor=c(241.89,29,154,199,132.8))
 

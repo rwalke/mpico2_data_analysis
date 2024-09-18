@@ -97,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="rail-distance-2019-2023" class="level4">
+<section id="rail-distance-2019-2023" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="rail-distance-2019-2023">Rail distance 2019-2023</h4>
 <table class="table">
 <thead>
@@ -168,6 +168,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+<p>purchase<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, year, number (one-way), km Per Trip (distance)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, total distance in km (total)</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;purchase definition<br>
+The institute booked most of the train tickets with the official travel partner (institute).<br>
+A small number of train tickets were booked by other means (offline).<br>
+Trips involving the use of monthly or annual tickets were not included. (BahnCard 100, Deutschlandticket).</p></div><div id="fn2"><p><sup>2</sup>&nbsp;Distance Assumptions<br>
+The spherical distance was calculated. The actual distance is greater.</p></div></div><p>The mean rail distance (one-way) for 2019-2023 was 265 km.</p>
 </section>
 <section id="mpidr-2019" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="mpidr-2019">MPIDR 2019</h2>
@@ -178,22 +184,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: Westtours"</span>, <span class="st">"Flights: Self-booked (survey estimate)"</span>, <span class="st">"Train: Institute bookings"</span>, <span class="st">"Train: Self-booked (survey estimate)"</span>, <span class="st">"Bus: Self-booked (survey estimate)"</span>, <span class="st">"Car: Self-booked (survey estimate)"</span>, <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">16</span>,<span class="dv">100</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">716</span>,<span class="dv">1</span>,rail2019<span class="sc">$</span>number,<span class="dv">21</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2500</span>,<span class="dv">2500</span>,rail2019<span class="sc">$</span>distance,<span class="dv">360</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">12199</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">2500</span>,<span class="dv">2500</span>,rail2019<span class="sc">$</span>distance,rail_mean_distance,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">12199</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">7</span>),<span class="dv">303000</span>,<span class="dv">449533</span>),</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="dv">220</span>,<span class="dv">214</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">154</span>,<span class="dv">231</span>,<span class="fl">132.8</span>))</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>CO2A[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>CO2A[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Year, Category (cat), Type, Response Rate<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (dist), kWh, Factor<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Survey Response Rates<br>
+<p>Year, Category (cat), Type, Response Rate<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> (dist), kWh, Factor<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Survey Response Rates<br>
 22 (61%) of the 36 survey participants had been at the institute in 2019.<br>
 89 (66%) of the 135 people working at the institute in 2019 were still at the institute in late 2021.<br>
-Our response rates were therefore 25% among the still-available people (22 / 89) and 16% among the whole 2019 population (22 / 135).</p></div><div id="fn2"><p><sup>2</sup>&nbsp;Distance Assumptions<br>
-Average train distance (one-way): 68% of trips 2019-2022 went to/from Berlin or Hamburg (about 200km on average). Most of the next-most-common destinations were long-distance (e.g., Munich, Groningen, or Paris) with some closer destinations mixed in, we assumed an average of 700km.<br>
+Our response rates were therefore 25% among the still-available people (22 / 89) and 16% among the whole 2019 population (22 / 135).</p></div><div id="fn4"><p><sup>4</sup>&nbsp;Distance Assumptions<br>
+Average train distance (one-way, booked by institute): The spherical distance was calculated.<br>
+Average train distance (one-way, self-booked): The mean rail distance (one-way) for 2019-2023 was 265 km.<br>
 Average bus and car trip distance (one-way): Rostock - Berlin<br>
 Average flight distance (one-way): half of the 2019 average roundtrip distance provided by Westtours<br>
-For the institute car, the distance indicates the distance traveled over the entire year.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;Conversion Factors<br>
+For the institute car, the distance indicates the distance traveled over the entire year.</p></div><div id="fn5"><p><sup>5</sup>&nbsp;Conversion Factors<br>
 Pkm = person kilometer; measures emissions per kilometer per individual passenger (rather than per vehicle)<br>
 Flight conversion factors are taken from Westtours’ report, but not used here; instead we use the total tons of CO<sub>2</sub> that they report.<br>
 Transport factors from German Environment Agency <a href="https://www.umweltbundesamt.de/bild/vergleich-der-durchschnittlichen-emissionen-0" class="uri">https://www.umweltbundesamt.de/bild/vergleich-der-durchschnittlichen-emissionen-0</a><br>
@@ -271,11 +278,11 @@ Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompe
 <td>Train: Self-booked (survey estimate)</td>
 <td>16</td>
 <td>21</td>
-<td>360</td>
+<td>265</td>
 <td>NA</td>
 <td>29.0</td>
-<td>0.22</td>
-<td>1.37</td>
+<td>0.16</td>
+<td>1.01</td>
 </tr>
 <tr class="odd">
 <td>2019</td>
@@ -339,7 +346,7 @@ Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompe
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO<sub>2</sub> footprint for 2021 was 534.62 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2021 was 534.26 t.</strong></p>
 <hr>
 </section>
 </section>
@@ -352,19 +359,19 @@ Heating conversion factors from RSAG Rostock, “Fernwärmetarif ohne Klimakompe
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: Westtours"</span>, <span class="st">"Flights: Self-booked (survey estimate)"</span>, <span class="st">"Train: Institute bookings"</span>, <span class="st">"Train: Self-booked (survey estimate)"</span>, <span class="st">"Bus: Self-booked (survey estimate)"</span>, <span class="st">"Car: Self-booked (survey estimate)"</span>, <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">19</span>,<span class="dv">100</span>,<span class="dv">19</span>,<span class="dv">19</span>,<span class="dv">19</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">75</span>,<span class="dv">0</span>,rail2020<span class="sc">$</span>number,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">4288</span>,<span class="dv">2500</span>,rail2020<span class="sc">$</span>distance,<span class="dv">360</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">4756</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">4288</span>,<span class="dv">2500</span>,rail2020<span class="sc">$</span>distance,rail_mean_distance,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">4756</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">7</span>),<span class="dv">309886</span>,<span class="dv">388600</span>),</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="fl">202.1</span>,<span class="dv">214</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">154</span>,<span class="dv">199</span>,<span class="fl">132.8</span>))</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>CO2B[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>CO2B[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Year, Category (cat), Type, Response Rate<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> (dist), kWh, Factor<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Survey Response Rates<br>
+<p>Year, Category (cat), Type, Response Rate<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> (dist), kWh, Factor<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;Survey Response Rates<br>
 26 (72%) of the 36 survey participants had been at the institute in 2020.<br>
 89 (66%) of the 135 people working at the institute in 2020 were still at the institute in mid-2022.<br>
-Our response rates were therefore 29% among the still-available people (22 / 89) and 19% among the whole 2020 population (22 / 135).</p></div><div id="fn5"><p><sup>5</sup>&nbsp;Distance Assumptions<br>
-See 2019.</p></div><div id="fn6"><p><sup>6</sup>&nbsp;Conversion Factors<br>
+Our response rates were therefore 29% among the still-available people (22 / 89) and 19% among the whole 2020 population (22 / 135).</p></div><div id="fn7"><p><sup>7</sup>&nbsp;Distance Assumptions<br>
+See 2019.</p></div><div id="fn8"><p><sup>8</sup>&nbsp;Conversion Factors<br>
 See 2019.</p></div></div></section>
 <section id="results-1" class="level3">
 <h3 class="anchored" data-anchor-id="results-1">Results</h3>
@@ -438,11 +445,11 @@ See 2019.</p></div></div></section>
 <td>Train: Self-booked (survey estimate)</td>
 <td>19</td>
 <td>8</td>
-<td>360</td>
+<td>265</td>
 <td>NA</td>
 <td>29.0</td>
-<td>0.08</td>
-<td>0.44</td>
+<td>0.06</td>
+<td>0.32</td>
 </tr>
 <tr class="odd">
 <td>2020</td>
@@ -506,7 +513,7 @@ See 2019.</p></div></div></section>
 </tr>
 </tbody>
 </table>
-<p><strong>The total CO<sub>2</sub> footprint for 2020 was 180.3 t.</strong></p>
+<p><strong>The total CO<sub>2</sub> footprint for 2020 was 180.18 t.</strong></p>
 <hr>
 </section>
 </section>
@@ -519,19 +526,19 @@ See 2019.</p></div></div></section>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type=</span><span class="fu">c</span>(<span class="st">"Flights: Westtours"</span>, <span class="st">"Flights: Self-booked (survey estimate)"</span>, <span class="st">"Train: Institute bookings"</span>, <span class="st">"Train: Self-booked (survey estimate)"</span>, <span class="st">"Bus: Self-booked (survey estimate)"</span>, <span class="st">"Car: Self-booked (survey estimate)"</span>, <span class="st">"Institute car"</span>, <span class="st">"Electricity"</span>, <span class="st">"Heating"</span>),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rRate=</span><span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">25</span>,<span class="dv">100</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span>),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">number=</span><span class="fu">c</span>(<span class="dv">33</span>,<span class="dv">2</span>,rail2021<span class="sc">$</span>number,<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">3290</span>,<span class="dv">2500</span>,rail2021<span class="sc">$</span>distance,<span class="dv">260</span>,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">1670</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dist=</span><span class="fu">c</span>(<span class="dv">3290</span>,<span class="dv">2500</span>,rail2021<span class="sc">$</span>distance,rail_mean_distance,<span class="dv">241</span>,<span class="dv">241</span>,<span class="dv">1670</span>,<span class="cn">NA</span>,<span class="cn">NA</span>),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">kWh=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="dv">7</span>),<span class="dv">309671</span>,<span class="dv">455000</span>),</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">factor=</span><span class="fu">c</span>(<span class="dv">220</span>,<span class="dv">214</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">29</span>,<span class="dv">154</span>,<span class="dv">154</span>,<span class="dv">199</span>,<span class="fl">132.8</span>))</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>CO2C[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>CO2C[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Year, Category (cat), Type, Response Rate<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> (dist), kWh, Factor<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
-<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;Survey Response Rates<br>
+<p>Year, Category (cat), Type, Response Rate<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> (rRate), Number (one-way), km Per Trip<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> (dist), kWh, Factor<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;Survey Response Rates<br>
 33 (92%) of the 36 survey participants had been at the institute in 2021.<br>
 107 (82%) of the 131 people working at the institute in 2021 were still at the institute in mid-2022.<br>
-Our response rates were therefore 31% among the still-available people (33 / 107) and 25% among the whole 2021 population (33 / 131).</p></div><div id="fn8"><p><sup>8</sup>&nbsp;Distance Assumptions<br>
-See 2019.</p></div><div id="fn9"><p><sup>9</sup>&nbsp;Conversion Factors<br>
+Our response rates were therefore 31% among the still-available people (33 / 107) and 25% among the whole 2021 population (33 / 131).</p></div><div id="fn10"><p><sup>10</sup>&nbsp;Distance Assumptions<br>
+See 2019.</p></div><div id="fn11"><p><sup>11</sup>&nbsp;Conversion Factors<br>
 See 2019.</p></div></div></section>
 <section id="results-2" class="level3">
 <h3 class="anchored" data-anchor-id="results-2">Results</h3>
@@ -605,7 +612,7 @@ See 2019.</p></div></div></section>
 <td>Train: Self-booked (survey estimate)</td>
 <td>25</td>
 <td>0</td>
-<td>260</td>
+<td>265</td>
 <td>NA</td>
 <td>29.0</td>
 <td>0.00</td>
@@ -694,9 +701,9 @@ See 2019.</p></div></div></section>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>CO2D[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>CO2D[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> (dist), kWh, Factor<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
-<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;Distance Assumptions<br>
-atmosfair reports 309 bookings for 2022 with a total of 872880 km of flights and a total of 186.3143 tonnes of C0<sub>2</sub> (RFI 2.7). There where 309 bookings but probably at least 378 single flights (2309 km per single flight, 214g CO<sub>2</sub> RFI 2.7 per person and km).</p></div><div id="fn11"><p><sup>11</sup>&nbsp;Conversion Factors<br>
+<p>Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> (dist), kWh, Factor<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;Distance Assumptions<br>
+atmosfair reports 309 bookings for 2022 with a total of 872880 km of flights and a total of 186.3143 tonnes of C0<sub>2</sub> (RFI 2.7). There where 309 bookings but probably at least 378 single flights (2309 km per single flight, 214g CO<sub>2</sub> RFI 2.7 per person and km).</p></div><div id="fn13"><p><sup>13</sup>&nbsp;Conversion Factors<br>
 See 2019.</p></div></div></section>
 <section id="results-3" class="level3">
 <h3 class="anchored" data-anchor-id="results-3">Results</h3>
@@ -811,9 +818,9 @@ See 2019.</p></div></div></section>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>CO2E[,CO2resp<span class="sc">:</span><span class="er">=</span><span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dist), number<span class="sc">*</span>dist<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>, kWh<span class="sc">*</span>factor<span class="sc">/</span><span class="fl">1e6</span>)]</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>CO2E[,CO2all<span class="sc">:</span><span class="er">=</span>CO2resp <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> rRate]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> (dist), kWh, Factor<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
-<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;Distance Assumptions<br>
-atmosfair reports 494 bookings for 2023 with a total of 1709587 km of flights and a total of 413.52 tonnes of C0<sub>2</sub> (RFI 2.7). There where 494 bookings but probably 708 single flights (2415 km per single flight, 242g CO<sub>2</sub> RFI 2.7 per person and km).</p></div><div id="fn13"><p><sup>13</sup>&nbsp;Conversion Factors<br>
+<p>Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> (dist), kWh, Factor<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> (g CO<sub>2</sub> / kWh or g CO<sub>2</sub> / Pkm), t CO<sub>2</sub> among respondents (CO2resp), t CO<sub>2</sub> assuming 100% response rate (CO2all)</p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>&nbsp;Distance Assumptions<br>
+atmosfair reports 494 bookings for 2023 with a total of 1709587 km of flights and a total of 413.52 tonnes of C0<sub>2</sub> (RFI 2.7). There where 494 bookings but probably 708 single flights (2415 km per single flight, 242g CO<sub>2</sub> RFI 2.7 per person and km).</p></div><div id="fn15"><p><sup>15</sup>&nbsp;Conversion Factors<br>
 See 2019.</p></div></div></section>
 <section id="results-4" class="level3">
 <h3 class="anchored" data-anchor-id="results-4">Results</h3>

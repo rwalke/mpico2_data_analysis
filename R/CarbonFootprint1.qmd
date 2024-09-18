@@ -36,13 +36,29 @@ auto_round_dt<- function(dt, ndigits=3, return_copy=TRUE){
 rail <- auto_round_dt(rail12geom[,.(number=.N, distance=sum(distance)/.N, total=sum(distance)), by=.(purchase, year)], ndigits = 0, return_copy = TRUE)
 
 cat(md_table(rail))
+
+rail2 <- auto_round_dt(rail12geom[,.(number=.N, distance=sum(distance)/.N, total=sum(distance))], ndigits = 0, return_copy = TRUE)
+
 rail2019 <- rail[purchase=="institute" & year == 2019,]
 rail2020 <- rail[purchase=="institute" & year == 2020,]
 rail2021 <- rail[purchase=="institute" & year == 2021,]
 rail2022 <- rail[purchase=="institute" & year == 2022,]
 rail2023 <- rail[purchase=="institute" & year == 2023,]
 
+rail_mean_distance <- rail2$distance
 ```
+purchase[^1], year, number (one-way), km Per Trip (distance)[^2], total distance in km (total)
+
+The mean rail distance (one-way) for 2019-2023 was `r rail_mean_distance` km.
+
+[^1]: purchase definition\
+    The institute booked most of the train tickets with the official travel partner (institute).\
+    A small number of train tickets were booked by other means (offline).\
+    Trips involving the use of monthly or annual tickets were not included. (BahnCard 100, Deutschlandticket).
+
+
+[^2]: Distance Assumptions\
+    The spherical distance was calculated. The actual distance is greater.
 
 ## MPIDR 2019
 
@@ -54,7 +70,7 @@ CO2A <- data.table(year=rep(2019,9),cat=c(rep("Travel",7),rep("Energy",2)),
                     type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
                     rRate=c(100,16,100,16,16,16,100,100,100),
                     number=c(716,1,rail2019$number,21,5,2,1,NA,NA),
-                    dist=c(2500,2500,rail2019$distance,360,241,241,12199,NA,NA),
+                    dist=c(2500,2500,rail2019$distance,rail_mean_distance,241,241,12199,NA,NA),
                     kWh=c(rep(NA,7),303000,449533),
                     factor=c(220,214,29,29,29,154,154,231,132.8))
 
@@ -62,20 +78,21 @@ CO2A[,CO2resp:=ifelse(!is.na(dist), number*dist*factor/1e6, kWh*factor/1e6)]
 CO2A[,CO2all:=CO2resp * 100 / rRate]
 ```
 
-Year, Category (cat), Type, Response Rate[^1] (rRate), Number (one-way), km Per Trip[^2] (dist), kWh, Factor[^3] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
+Year, Category (cat), Type, Response Rate[^3] (rRate), Number (one-way), km Per Trip[^4] (dist), kWh, Factor[^5] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
 
-[^1]: Survey Response Rates\
+[^3]: Survey Response Rates\
     22 (61%) of the 36 survey participants had been at the institute in 2019.\
     89 (66%) of the 135 people working at the institute in 2019 were still at the institute in late 2021.\
     Our response rates were therefore 25% among the still-available people (22 / 89) and 16% among the whole 2019 population (22 / 135).
 
-[^2]: Distance Assumptions\
-    Average train distance (one-way): 68% of trips 2019-2022 went to/from Berlin or Hamburg (about 200km on average). Most of the next-most-common destinations were long-distance (e.g., Munich, Groningen, or Paris) with some closer destinations mixed in, we assumed an average of 700km.\
+[^4]: Distance Assumptions\
+    Average train distance (one-way, booked by institute): The spherical distance was calculated.\
+    Average train distance (one-way, self-booked): The mean rail distance (one-way) for 2019-2023 was `r rail_mean_distance` km.\
     Average bus and car trip distance (one-way): Rostock - Berlin\
     Average flight distance (one-way): half of the 2019 average roundtrip distance provided by Westtours\
     For the institute car, the distance indicates the distance traveled over the entire year.
 
-[^3]: Conversion Factors\
+[^5]: Conversion Factors\
     Pkm = person kilometer; measures emissions per kilometer per individual passenger (rather than per vehicle)\
     Flight conversion factors are taken from Westtours' report, but not used here; instead we use the total tons of CO~2~ that they report.\
     Transport factors from German Environment Agency <https://www.umweltbundesamt.de/bild/vergleich-der-durchschnittlichen-emissionen-0>\
@@ -105,7 +122,7 @@ CO2B <- data.table(year=rep(2020,9),cat=c(rep("Travel",7),rep("Energy",2)),
                     type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
                     rRate=c(100,19,100,19,19,19,100,100,100),
                     number=c(75,0,rail2020$number,8,0,0,1,NA,NA),
-                    dist=c(4288,2500,rail2020$distance,360,241,241,4756,NA,NA),
+                    dist=c(4288,2500,rail2020$distance,rail_mean_distance,241,241,4756,NA,NA),
                     kWh=c(rep(NA,7),309886,388600),
                     factor=c(202.1,214,29,29,29,154,154,199,132.8))
 
@@ -113,17 +130,17 @@ CO2B[,CO2resp:=ifelse(!is.na(dist), number*dist*factor/1e6, kWh*factor/1e6)]
 CO2B[,CO2all:=CO2resp * 100 / rRate]
 ```
 
-Year, Category (cat), Type, Response Rate[^4] (rRate), Number (one-way), km Per Trip[^5] (dist), kWh, Factor[^6] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
+Year, Category (cat), Type, Response Rate[^6] (rRate), Number (one-way), km Per Trip[^7] (dist), kWh, Factor[^8] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
 
-[^4]: Survey Response Rates\
+[^6]: Survey Response Rates\
     26 (72%) of the 36 survey participants had been at the institute in 2020.\
     89 (66%) of the 135 people working at the institute in 2020 were still at the institute in mid-2022.\
     Our response rates were therefore 29% among the still-available people (22 / 89) and 19% among the whole 2020 population (22 / 135).
 
-[^5]: Distance Assumptions\
+[^7]: Distance Assumptions\
     See 2019.
 
-[^6]: Conversion Factors\
+[^8]: Conversion Factors\
     See 2019.
 
 ### Results
@@ -149,7 +166,7 @@ CO2C <- data.table(year=rep(2021,9),cat=c(rep("Travel",7),rep("Energy",2)),
                     type=c("Flights: Westtours", "Flights: Self-booked (survey estimate)", "Train: Institute bookings", "Train: Self-booked (survey estimate)", "Bus: Self-booked (survey estimate)", "Car: Self-booked (survey estimate)", "Institute car", "Electricity", "Heating"),
                     rRate=c(100,25,100,25,25,25,100,100,100),
                     number=c(33,2,rail2021$number,0,6,2,1,NA,NA),
-                    dist=c(3290,2500,rail2021$distance,260,241,241,1670,NA,NA),
+                    dist=c(3290,2500,rail2021$distance,rail_mean_distance,241,241,1670,NA,NA),
                     kWh=c(rep(NA,7),309671,455000),
                     factor=c(220,214,29,29,29,154,154,199,132.8))
 
@@ -157,17 +174,17 @@ CO2C[,CO2resp:=ifelse(!is.na(dist), number*dist*factor/1e6, kWh*factor/1e6)]
 CO2C[,CO2all:=CO2resp * 100 / rRate]
 ```
 
-Year, Category (cat), Type, Response Rate[^7] (rRate), Number (one-way), km Per Trip[^8] (dist), kWh, Factor[^9] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
+Year, Category (cat), Type, Response Rate[^9] (rRate), Number (one-way), km Per Trip[^10] (dist), kWh, Factor[^11] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
 
-[^7]: Survey Response Rates\
+[^9]: Survey Response Rates\
     33 (92%) of the 36 survey participants had been at the institute in 2021.\
     107 (82%) of the 131 people working at the institute in 2021 were still at the institute in mid-2022.\
     Our response rates were therefore 31% among the still-available people (33 / 107) and 25% among the whole 2021 population (33 / 131).
 
-[^8]: Distance Assumptions\
+[^10]: Distance Assumptions\
     See 2019.
 
-[^9]: Conversion Factors\
+[^11]: Conversion Factors\
     See 2019.
 
 ### Results
@@ -202,12 +219,12 @@ CO2D[,CO2resp:=ifelse(!is.na(dist), number*dist*factor/1e6, kWh*factor/1e6)]
 CO2D[,CO2all:=CO2resp * 100 / rRate]
 ```
 
-Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip[^10] (dist), kWh, Factor[^11] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
+Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip[^12] (dist), kWh, Factor[^13] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
 
-[^10]: Distance Assumptions\
+[^12]: Distance Assumptions\
     atmosfair reports 309 bookings for 2022 with a total of 872880 km of flights and a total of 186.3143 tonnes of C0~2~ (RFI 2.7). There where 309 bookings but probably at least 378 single flights (2309 km per single flight, 214g CO~2~ RFI 2.7 per person and km).
 
-[^11]: Conversion Factors\
+[^13]: Conversion Factors\
     See 2019.
 
 ### Results
@@ -242,12 +259,12 @@ CO2E[,CO2resp:=ifelse(!is.na(dist), number*dist*factor/1e6, kWh*factor/1e6)]
 CO2E[,CO2all:=CO2resp * 100 / rRate]
 ```
 
-Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip[^12] (dist), kWh, Factor[^13] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
+Year, Category (cat), Type, Response Rate (rRate), Number (one-way), km Per Trip[^14] (dist), kWh, Factor[^15] (g CO~2~ / kWh or g CO~2~ / Pkm), t CO~2~ among respondents (CO2resp), t CO~2~ assuming 100% response rate (CO2all)
 
-[^12]: Distance Assumptions\
+[^14]: Distance Assumptions\
     atmosfair reports 494 bookings for 2023 with a total of 1709587 km of flights and a total of 413.52 tonnes of C0~2~ (RFI 2.7). There where 494 bookings but probably 708 single flights (2415 km per single flight, 242g CO~2~ RFI 2.7 per person and km).
 
-[^13]: Conversion Factors\
+[^15]: Conversion Factors\
     See 2019.
 
 ### Results

@@ -6,6 +6,7 @@ reference-location: margin
 ---
 
 ```{r}
+#| warning: false
 #| echo: false
 library(data.table)
 library(simplermarkdown)
@@ -361,6 +362,8 @@ pie_plot <- dt %>%
   theme(legend.text = element_text(size=12),plot.title = element_text(hjust = 0.5))+
   ggtitle("CO2 emissions at the MPIDR\nby means of transportation, 2019-2023")
 
+line_plot
+pie_plot
 
 #save plots 
 

@@ -9,6 +9,13 @@ reference-location: margin
 #| echo: false
 library(data.table)
 library(simplermarkdown)
+library(ggplot2)
+library(dplyr)
+library(ggrepel)
+#library(tidyverse)
+library(forcats)
+
+plot_data_dir <- file.path("..","..","Data")
 
 rail_data_dir <- file.path("..","R_rail_distance")
 load(file.path(rail_data_dir, "rail12geom.Rdata"))
@@ -47,18 +54,18 @@ rail2023 <- rail[purchase=="institute" & year == 2023,]
 
 rail_mean_distance <- rail2$distance
 ```
-purchase[^1], year, number (one-way), km Per Trip (distance)[^2], total distance in km (total)
 
-The mean rail distance (one-way) for 2019-2023 was `r rail_mean_distance` km.
+purchase[^1], year, number (one-way), km Per Trip (distance)[^2], total distance in km (total)
 
 [^1]: purchase definition\
     The institute booked most of the train tickets with the official travel partner (institute).\
     A small number of train tickets were booked by other means (offline).\
     Trips involving the use of monthly or annual tickets were not included. (BahnCard 100, Deutschlandticket).
 
-
 [^2]: Distance Assumptions\
     The spherical distance was calculated. The actual distance is greater.
+
+The mean rail distance (one-way) for 2019-2023 was `r rail_mean_distance` km.
 
 ## MPIDR 2019
 
@@ -279,3 +286,85 @@ cat(md_table(CO2E2))
 **The total CO~2~ footprint for 2023 was `r CO2E[,round(sum(CO2all),2)]` t.**
 
 ------------------------------------------------------------------------
+
+```{r}
+#| output: asis
+#| echo: false
+
+data_2019_2023 <- rbind(CO2A2,CO2B2,CO2C2,CO2D2,CO2E2)
+
+#setwd("N:/Sustainability Group/internal/CO2/Data")
+
+write.csv(data_2019_2023, file.path(plot_data_dir, "Data_2019_2023.csv"))
+
+```
+
+### Plots
+
+```{r}
+#| output: asis
+#| echo: false
+
+#setwd("N:/Sustainability Group/internal/CO2/Data")
+dt <- read.csv(file.path(plot_data_dir, "Data_2019_2023.csv")) %>% 
+  group_by(year) %>% 
+  mutate(CO2tot=sum(CO2all))
+
+# line plot with trends in CO2 by category
+
+line_plot <- dt %>% 
+  group_by(year,cat) %>% 
+  summarise(CO2all=sum(CO2all),Total=CO2tot) %>% 
+  distinct() %>% 
+  ggplot()+
+  geom_line(aes(year, CO2all,group_by=cat,col=cat),size=1) +
+  geom_line(aes(year, Total,col="Total"), size=1)+
+  scale_color_manual(values=c("black","#6699ff","#F46D43"),
+                     breaks = c("Total", "Energy", "Travel"), name="Category")+
+  theme_bw()+
+  ylab("CO2 emissions (t)")+
+  theme(plot.title = element_text(hjust = 0.5)) +
+  ggtitle("CO2 emissions at the MPIDR by category, 2019-2023")
+  
+
+# pie chart of travel emissions
+
+pie_plot <- dt %>% 
+  group_by(cat) %>% 
+  mutate(CO2tot=sum(CO2all)) %>%  
+  filter(cat=="Travel") %>% 
+  mutate(type=case_when(type=="Flights: Westtours"~"Flights",
+                        type=="Flights: Self-booked (survey estimate)"~"Flights",
+                        type=="Flights: atmosfair"~"Flights",
+                        type=="Train: Institute bookings"~"Trains",
+                        type=="Train: Self-booked (survey estimate)"~"Trains",
+                        type=="Bus: Self-booked (survey estimate)"~"Car and Bus",
+                        type=="Car: Self-booked (survey estimate)"~"Car and Bus",
+                        type=="Institute car"~"Car and Bus",)) %>% 
+  group_by(type) %>% 
+  summarise(CO2all=sum(CO2all),CO2tot=CO2tot) %>% 
+  distinct() %>% 
+  mutate(prop=round((CO2all/CO2tot)*100,2),
+         type=factor(type,levels=c("Trains","Car and Bus","Flights")),
+         csum = rev(cumsum(rev(prop))), 
+         pos = prop/2 + lead(csum, 1),
+         pos = if_else(is.na(pos), prop/2, pos)) %>% 
+   
+  ggplot(aes(x="", y=prop, fill = fct_inorder(type))) +
+  geom_col(width = 1, color = NA) +
+  coord_polar(theta = "y",start=0) +
+  scale_fill_manual(values=c("#FDAE61","#3288BD","#ABDDA4"), name="")+
+  geom_label_repel(aes(y = pos, label = paste0(prop, "%")),
+                   size = 4.5, nudge_x = 0, nudge_y=0, show.legend = FALSE) +
+  guides(fill = guide_legend(title = "")) +
+  theme_void()+
+  theme(legend.text = element_text(size=12),plot.title = element_text(hjust = 0.5))+
+  ggtitle("CO2 emissions at the MPIDR\nby means of transportation, 2019-2023")
+
+
+#save plots 
+
+ggsave(line_plot,file=file.path(plot_data_dir, "Plot_CO2tot.png"), width=2500,height = 1500,unit="px")
+ggsave(pie_plot,file=file.path(plot_data_dir, "Plot_CO2bytransport.png"), width=1700,height = 1700,unit="px")
+
+```

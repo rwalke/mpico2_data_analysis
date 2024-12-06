@@ -315,18 +315,30 @@ dt <- read.csv(file.path(plot_data_dir, "Data_2019_2023.csv")) %>%
 
 line_plot <- dt %>% 
   group_by(year,cat) %>% 
-  summarise(CO2all=sum(CO2all),Total=CO2tot) %>% 
+  reframe(CO2all=sum(CO2all),Total=CO2tot) %>% 
   distinct() %>% 
   ggplot()+
-  geom_line(aes(year, CO2all,group_by=cat,col=cat),size=1) +
-  geom_line(aes(year, Total,col="Total"), size=1)+
+  geom_line(aes(year, CO2all,col=cat),linewidth=1) +
+  geom_line(aes(year, Total,col="Total"), linewidth=1)+
   scale_color_manual(values=c("black","#6699ff","#F46D43"),
                      breaks = c("Total", "Energy", "Travel"), name="Category")+
   theme_bw()+
   ylab("CO2 emissions (t)")+
   theme(plot.title = element_text(hjust = 0.5)) +
   ggtitle("CO2 emissions at the MPIDR by category, 2019-2023")
-  
+ 
+col_plot <- dt %>% 
+  group_by(year,cat) %>% 
+  reframe(CO2all=sum(CO2all),Total=CO2tot) %>%
+  mutate(cat2=factor(cat, levels = c('Travel', 'Energy')) ) %>%
+  distinct() %>% 
+  ggplot()+
+  geom_col(aes(year, CO2all, fill=cat2))+
+  scale_fill_manual(values=c("Energy"="#F46D43", "Travel"="#6699ff"),"category")+
+  theme_bw()+
+  ylab("CO2 emissions (t)")+
+  theme(plot.title = element_text(hjust = 0.5)) +
+  ggtitle("CO2 emissions at the MPIDR by category, 2019-2023")
 
 # pie chart of travel emissions
 
@@ -343,7 +355,7 @@ pie_plot <- dt %>%
                         type=="Car: Self-booked (survey estimate)"~"Car and Bus",
                         type=="Institute car"~"Car and Bus",)) %>% 
   group_by(type) %>% 
-  summarise(CO2all=sum(CO2all),CO2tot=CO2tot) %>% 
+  reframe(CO2all=sum(CO2all),CO2tot=CO2tot) %>% 
   distinct() %>% 
   mutate(prop=round((CO2all/CO2tot)*100,2),
          type=factor(type,levels=c("Trains","Car and Bus","Flights")),
@@ -362,12 +374,14 @@ pie_plot <- dt %>%
   theme(legend.text = element_text(size=12),plot.title = element_text(hjust = 0.5))+
   ggtitle("CO2 emissions at the MPIDR\nby means of transportation, 2019-2023")
 
-line_plot
+# line_plot
+col_plot
 pie_plot
 
 #save plots 
 
-ggsave(line_plot,file=file.path(plot_data_dir, "Plot_CO2tot.png"), width=2500,height = 1500,unit="px")
+ggsave(col_plot,file=file.path(plot_data_dir, "Plot_CO2totB.png"), width=2500,height = 1500,unit="px")
+ggsave(line_plot,file=file.path(plot_data_dir, "Plot_CO2totA.png"), width=2500,height = 1500,unit="px")
 ggsave(pie_plot,file=file.path(plot_data_dir, "Plot_CO2bytransport.png"), width=1700,height = 1700,unit="px")
 
 ```
